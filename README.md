@@ -50,9 +50,9 @@ It retrieves the first URL from the search results and checks the similarity of 
 When users upload files, the application calculates the similarity between the texts of the files.
 It uses cosine similarity to measure how similar the texts are.
 
-
 ## Original Author
 - [@KarthikS](https://www.github.com/Karthik-02)
+
 
 ## Changes made by Our team
 
@@ -74,7 +74,7 @@ It uses cosine similarity to measure how similar the texts are.
 Clone the project
 
 ```bash
-  git clone https://github.com/realsahilthakur/plagrism-detector.git
+  git clone https://github.com/realsahilthakur/plag.git
 ```
 
 Go to the project directory
