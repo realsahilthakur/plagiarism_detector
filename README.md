@@ -80,7 +80,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd plagiarism-detection
+  cd plag
 ```
 
 Install dependencies
