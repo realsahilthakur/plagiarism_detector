@@ -120,11 +120,11 @@ st.markdown(custom_css, unsafe_allow_html=True)
 st.title('Plagiarism Detector')
 
 st.write("""
-### Enter the text or upload a file to check for plagiarism or find similarities between files
+### Enter the text or upload a file to check for plagiarism or find similarities between two files
 """)
 option = st.radio(
     "Select input option:",
-    ('Enter text', 'Upload file', 'Find similarities between files')
+    ('Enter text', 'Upload file', 'Find similarities between two files')
 )
 
 text = ""
@@ -150,7 +150,7 @@ elif option == 'Upload file':
         text = ""
         uploaded_files = []
 else:
-    uploaded_files = st.file_uploader("Upload multiple files (.docx, .pdf, .txt)", type=["docx", "pdf", "txt"], accept_multiple_files=True)
+    uploaded_files = st.file_uploader("Upload two files (.docx, .pdf, .txt)", type=["docx", "pdf", "txt"], accept_multiple_files=True)
     texts = []
     filenames = []
     if len(uploaded_files) > 2:
@@ -175,7 +175,7 @@ if text or uploaded_files:
             """)
             st.stop()
         
-        if option == 'Find similarities between files':
+        if option == 'Find similarities between two files':
             if len(uploaded_files) != 2:
                 st.warning("Please upload exactly two files to find similarities.")
             else:
