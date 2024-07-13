@@ -117,11 +117,14 @@ st.set_page_config(page_title='Plagiarism Detection', layout='wide', initial_sid
 # Inject custom CSS into Streamlit app
 st.markdown(custom_css, unsafe_allow_html=True)
 
-st.title('Plagiarism Detector')
+# Center the title and instruction text
+st.markdown("""
+<div style='text-align: center;'>
+    <h1>Plagiarism Detector</h1>
+    <h3>Enter the text or upload a file to check for plagiarism or find similarities between two files</h3>
+</div>
+""", unsafe_allow_html=True)
 
-st.write("""
-### Enter the text or upload a file to check for plagiarism or find similarities between two files
-""")
 option = st.radio(
     "Select input option:",
     ('Enter text', 'Upload file', 'Find similarities between two files')
