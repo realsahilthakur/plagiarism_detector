@@ -74,7 +74,7 @@ It uses cosine similarity to measure how similar the texts are.
 Clone the project
 
 ```bash
-  git clone https://github.com/realsahilthakur/plagrism-detector.git
+  git clone https://github.com/realsahilthakur/plag.git
 ```
 
 Go to the project directory
