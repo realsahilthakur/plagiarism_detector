@@ -154,7 +154,7 @@ else:
     texts = []
     filenames = []
     if len(uploaded_files) > 2:
-        st.warning("Please upload only two files at a time for similarity check.")
+        st.warning("You can only check the similarities between 2 files")
     else:
         for uploaded_file in uploaded_files:
             if uploaded_file is not None:
