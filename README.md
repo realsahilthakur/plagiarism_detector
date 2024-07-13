@@ -1,6 +1,6 @@
 # Plagarism Detector
 
-This Streamlit application detects plagiarism and measures textual similarities between two files. It allows users to enter text or upload files (docx, pdf, txt). It splits the text into sentences, searches Google for each sentence, and compares the input text with retrieved results using cosine similarity. Users can also compare the similarity between two uploaded files. The results are displayed in a formatted DataFrame.
+This Streamlit application can detects plagiarism in the text or file and also capable to measures textual similarities between two files. It allows users to enter text or upload files (docx, pdf, txt). It splits the text into sentences, searches Google for each sentence, and compares the input text with retrieved results using cosine similarity. Users can also compare the similarity between two uploaded files. The results are displayed in a formatted DataFrame.
 
 
 ## Tech Stack
