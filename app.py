@@ -99,11 +99,11 @@ def get_similarity_list2(text, url_list):
 custom_css = """
 <style>
 body {
-    background-color: #f0f0f0; /* Light gray background */
-    font-family: Arial, sans-serif;
+    background-color: #037b96; /* Light gray background */
+    font-family: cursive;
 }
 .stButton > button {
-    background-color: #1abc9c; /* Teal button */
+    background-color: #9d76cc; /* Teal button */
     color: white;
 }
 h1, h2, h3, h4, h5, h6, p, div, span, li, a, label, .stRadio, .stTextArea, .stFileUploader, .stDataFrame, .stDataFrame > div {
@@ -152,6 +152,7 @@ elif option == 'Upload file':
     else:
         text = ""
         uploaded_files = []
+#check if you can check if the uploded file is in doc,pdf,txt
 else:
     uploaded_files = st.file_uploader("Upload two files (.docx, .pdf, .txt)", type=["docx", "pdf", "txt"], accept_multiple_files=True)
     texts = []
