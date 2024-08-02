@@ -15,8 +15,8 @@ from botocore.exceptions import NoCredentialsError
 
 # AWS S3 Configuration
 S3_BUCKET = 'plagiarismfiles'
-AWS_ACCESS_KEY = 'AKIA47CRWNT3HW2VIPFO'
-AWS_SECRET_KEY = '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'
+AWS_ACCESS_KEY = ''
+AWS_SECRET_KEY = ''
 
 s3_client = boto3.client(
     's3',
