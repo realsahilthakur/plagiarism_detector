@@ -10,6 +10,19 @@ from sklearn.metrics.pairwise import cosine_similarity
 import io
 import docx2txt
 from PyPDF2 import PdfReader
+import boto3
+from botocore.exceptions import NoCredentialsError
+
+# AWS S3 Configuration
+S3_BUCKET = 'plagiarismfiles'
+AWS_ACCESS_KEY = 'AKIA47CRWNT3HW2VIPFO'
+AWS_SECRET_KEY = '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'
+
+s3_client = boto3.client(
+    's3',
+    aws_access_key_id=AWS_ACCESS_KEY,
+    aws_secret_access_key=AWS_SECRET_KEY
+)
 
 def get_sentences(text):
     sentences = tokenize.sent_tokenize(text)
@@ -95,6 +108,23 @@ def get_similarity_list2(text, url_list):
         similarity_list.append(similarity)
     return similarity_list
 
+def upload_to_s3(file, filename):
+    try:
+        s3_client.upload_fileobj(file, S3_BUCKET, filename)
+        st.success(f"File '{filename}' uploaded successfully.")
+    except NoCredentialsError:
+        st.error("Credentials not available.")
+
+def download_from_s3(filename):
+    try:
+        file = io.BytesIO()
+        s3_client.download_fileobj(S3_BUCKET, filename, file)
+        file.seek(0)
+        return file
+    except NoCredentialsError:
+        st.error("Credentials not available.")
+        return None
+
 # Custom CSS for Streamlit UI
 custom_css = """
 <style>
@@ -149,10 +179,12 @@ elif option == 'Upload file':
     if uploaded_file is not None:
         text = get_text_from_file(uploaded_file)
         uploaded_files = [uploaded_file]
+        # Upload file to S3
+        upload_to_s3(uploaded_file, uploaded_file.name)
     else:
         text = ""
         uploaded_files = []
-#check if you can check if the uploded file is in doc,pdf,txt
+
 else:
     uploaded_files = st.file_uploader("Upload two files (.docx, .pdf, .txt)", type=["docx", "pdf", "txt"], accept_multiple_files=True)
     texts = []
@@ -165,6 +197,8 @@ else:
                 text = get_text_from_file(uploaded_file)
                 texts.append(text)
                 filenames.append(uploaded_file.name)
+                # Upload files to S3
+                upload_to_s3(uploaded_file, uploaded_file.name)
         text = " ".join(texts)
 
 # Show the button only if there is text or uploaded files
@@ -189,23 +223,21 @@ if text or uploaded_files:
                 st.write(df)
         else:
             sentences = get_sentences(text)
-            url = []
-            for sentence in sentences:
-                url.append(get_url(sentence))
+            url_list = [get_url(sentence) for sentence in sentences]
 
-            if None in url:
+            if None in url_list:
                 st.write("""
                 ### No plagiarism detected!
                 """)
                 st.stop()
 
-            similarity_list = get_similarity_list2(text, url)
-            df = pd.DataFrame({'Sentence': sentences, 'URL': url, 'Similarity (%)': similarity_list})
+            similarity_list = get_similarity_list2(text, url_list)
+            df = pd.DataFrame({'Sentence': sentences, 'URL': url_list, 'Similarity (%)': similarity_list})
             df = df.sort_values(by=['Similarity (%)'], ascending=True)
         
             # Make URLs clickable in the DataFrame
             if 'URL' in df.columns:
-                df['URL'] = df['URL'].apply(lambda x: '{}{}'.format(x, x) if x else '')
+                df['URL'] = df['URL'].apply(lambda x: f'<a href="{x}" target="_blank">{x}</a>' if x else '')
             
             # Display results
-            st.write(df, unsafe_allow_html=True)
+            st.write(df.to_html(escape=False), unsafe_allow_html=True)
