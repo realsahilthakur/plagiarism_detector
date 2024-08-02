@@ -12,13 +12,16 @@ This Streamlit application can detects plagiarism in the text or file and also c
 **Libraries & Algorithms:** 
 
 *Libraries:*
-- Pandas
-- NLTK (Natural Language Toolkit)
-- Beautiful Soup
-- CountVectorizer and cosine_similarity from scikit-learn
-- docx2txt
-- PyPDF2
-- plotly.express (px)
+-streamlit
+-pandas 
+-nltk 
+-requests 
+-BeautifulSoup 
+-sklearn 
+-docx2txt
+-PyPDF2
+-boto3
+
   
 *Algorithms:*
 - Tokenization
@@ -26,6 +29,16 @@ This Streamlit application can detects plagiarism in the text or file and also c
 - Web Scraping
 - Document Retrieval
 - Data Visualization
+
+
+*AWS S3 setup:*
+Configuration for uploading and downloading files from an S3 bucket.
+
+
+*Additional Notes:*
+Security: Ensure your AWS credentials and S3 permissions are set correctly to avoid access issues.
+Dependencies: Make sure all required libraries are installed and configured properly on your EC2 instance.
+
 
 
 ## Original Key Features:
@@ -67,6 +80,8 @@ It uses cosine similarity to measure how similar the texts are.
 - Added custom CSS to make all text in the Streamlit app cursive.
 
 - Removed line, scatter, bar, pie, box, histogram,3d scatter and violin plots to simplify the output.
+  
+- integrated with the AWS S3 bucket 
 
 
 ## Run Locally
@@ -89,8 +104,14 @@ Install dependencies
   pip install -r requirements.txt
 ```
 
+
 Start the server
 
 ```bash
   streamlit run app.py
 ```
+
+
+*NOTE:*
+
+MAKE SURE TO ADD THE "S3 BUCKET NAME" , "AWS ACCESS KEY AND PRIVATE KEY".
