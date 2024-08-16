@@ -12,15 +12,15 @@ This Streamlit application can detects plagiarism in the text or file and also c
 **Libraries & Algorithms:** 
 
 *Libraries:*
--- streamlit
--- pandas 
--- nltk 
--- requests 
--- BeautifulSoup 
--- sklearn 
--- docx2txt
--- PyPDF2
--- boto3
+- streamlit
+- pandas 
+- nltk 
+- requests 
+- BeautifulSoup 
+- sklearn 
+- docx2txt
+- PyPDF2
+- boto3
 
   
 *Algorithms:*
